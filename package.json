@@ -19,5 +19,8 @@
   "homepage": "https://github.com/ham0215/no-code-utils#readme",
   "devDependencies": {
     "typescript": "^5.0.2"
-  }
+  },
+  "files": [
+    "dist/"
+  ]
 }
