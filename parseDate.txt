@@ -1,0 +1,3 @@
+・関数名はparseDate
+・言語はTypescript
+・文字列をDate型に変換する
