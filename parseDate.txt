@@ -1,3 +1,4 @@
 ・関数名はparseDate
 ・言語はTypescript
 ・文字列をDate型に変換する
+・変換に失敗した場合はundefinedを返却する
