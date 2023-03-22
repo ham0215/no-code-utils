@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/ham0215/no-code-utils#readme",
   "devDependencies": {
+    "@types/node": "^18.15.5",
     "typescript": "^5.0.2"
+  },
+  "dependencies": {
+    "openai": "^3.2.1"
   }
 }
