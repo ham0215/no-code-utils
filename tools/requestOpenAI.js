@@ -1,4 +1,5 @@
 const { Configuration, OpenAIApi } = require("openai");
+const fs = require('fs');
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -16,4 +17,13 @@ async function requestOpenAI(openai) {
   console.log(completion.data.choices[0].message.content);
 };
 
-requestOpenAI(openai);
+// requestOpenAI(openai);
+
+const res = "```typescript\nfunction parseDate(dateString: string): Date | undefined {\n  const date = new Date(dateString);\n  return isNaN(date.getTime()) ? undefined : date;\n}\n```";
+let result = res;
+const patterns = [/```typescript/g, /```/g];
+patterns.forEach(pattern => {
+  result = result.replace(pattern, '');
+});
+
+console.log(result);
