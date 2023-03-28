@@ -17,18 +17,32 @@ async function requestOpenAI(funcName, design) {
     ${design}
   `;
 
-  const completion = await openai.createChatCompletion({
+  const options = {
     model: 'gpt-3.5-turbo',
+    timeout: 10000,
     messages: [
       { role: 'user', content }
     ]
-  });
+  };
 
-  if (completion.status !== 200) throw new Error(completion.response.data.error.message);
+  const completion = await openai.createChatCompletion(options);
 
-  saveFile(funcName, completion.data.choices[0].message.content);
-  // rate limit
-  await sleep(3500);
+  if (completion.status === 200) {
+    saveFile(funcName, completion.data.choices[0].message.content);
+    // rate limit
+    await sleep(3000);
+  } else {
+    if (completion.status !== 502) {
+      throw new Error(completion.response.data.error.message);
+    }
+
+    // 502の場合は1度だけリトライする
+    const completion2 = await openai.createChatCompletion(options);
+    if (completion2.status !== 200) {
+      throw new Error(completion.response.data.error.message);
+    }
+    saveFile(funcName, completion2.data.choices[0].message.content);
+  }
 };
 
 async function getFiles() {
