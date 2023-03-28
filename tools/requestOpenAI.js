@@ -19,7 +19,6 @@ async function requestOpenAI(funcName, design) {
 
   const options = {
     model: 'gpt-3.5-turbo',
-    timeout: 10000,
     messages: [
       { role: 'user', content }
     ]
