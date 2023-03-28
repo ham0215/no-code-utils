@@ -42,7 +42,7 @@ async function requestOpenAI(funcName, design) {
     }
     saveFile(funcName, completion2.data.choices[0].message.content);
   }
-};
+}
 
 async function getFiles() {
   const files = fs.readdirSync('./docs');
@@ -50,18 +50,18 @@ async function getFiles() {
   for (let i = 0; i < files.length; i++) {
     await readFile(files[i]);
   }
-};
+}
 
 async function readFile(fileName) {
   console.info(fileName);
   const data = fs.readFileSync(path.join('./docs', fileName), 'utf-8');
-  console.info(data);
   await requestOpenAI(fileName.replace(/\.txt$/g, ''), data);
-};
+}
 
 async function saveFile(fileName, data) {
-  await fs.promises.writeFile(`./${fileName}.ts`, data);
-};
+  console.info(data);
+  await fs.promises.writeFile(`./dist/${fileName}.ts`, data);
+}
 
 function sleep(ms) {
   return new Promise((resolve) => {
@@ -69,4 +69,13 @@ function sleep(ms) {
   });
 }
 
+async function createIndex() {
+  const files = fs.readdirSync('./dist')
+
+  for (let i = 0; i < files.length; i++) {
+    await fs.promises.appendFile(`./index.ts`, `export * from './dist/${files[i].replace(/\.ts$/g, '')}';\n` );
+  }
+};
+
 getFiles();
+createIndex();
