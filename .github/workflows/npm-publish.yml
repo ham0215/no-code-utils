@@ -18,6 +18,8 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - run: npm ci
       - run: node tools/requestOpenAI.js
+        env:
+          OPENAI_API_KEY: ${{secrets.OPENAI_API_KEY}}
       - run: npm run build
       - run: npm publish
         env:
