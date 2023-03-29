@@ -21,6 +21,8 @@ jobs:
       - run: node tools/requestOpenAI.js
         env:
           OPENAI_API_KEY: ${{secrets.OPENAI_API_KEY}}
+      - run: bash ./tools/tsc.sh
+      - run: node tools/createIndex.js
       - run: npm run build
       - run: npm publish
         env:
