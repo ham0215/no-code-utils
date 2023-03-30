@@ -28,20 +28,12 @@ async function requestOpenAI(funcName, design) {
 
   if (completion.status === 200) {
     saveFile(funcName, completion.data.choices[0].message.content);
-    // rate limit
-    await sleep(3000);
   } else {
-    if (completion.status !== 502) {
-      throw new Error(completion.response.data.error.message);
-    }
-
-    // 502の場合は1度だけリトライする
-    const completion2 = await openai.createChatCompletion(options);
-    if (completion2.status !== 200) {
-      throw new Error(completion.response.data.error.message);
-    }
-    saveFile(funcName, completion2.data.choices[0].message.content);
+    console.log(completion.response.data.error.message);
   }
+
+  // rate limit (20/minute)
+  await sleep(3000);
 }
 
 async function getFiles() {
