@@ -52,7 +52,7 @@ async function readFile(fileName) {
 
 async function saveFile(fileName, data) {
   console.info(data);
-  await fs.promises.writeFile(`./dist/${fileName}.ts`, data);
+  await fs.promises.writeFile(`./libs/${fileName}.ts`, data);
 }
 
 function sleep(ms) {

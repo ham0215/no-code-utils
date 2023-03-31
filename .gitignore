@@ -103,6 +103,4 @@ typings/
 .tern-port
 
 # Ignore generated files
-index.ts
-index.js
-dist
+*.ts
