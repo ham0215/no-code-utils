@@ -1,5 +1,6 @@
 tools
 tsconfig.json
 .github
+index.ts
 libs
 !dist/libs
