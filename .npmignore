@@ -1,4 +1,5 @@
 tools
 tsconfig.json
 .github
-*.ts
+libs
+!dist/libs
