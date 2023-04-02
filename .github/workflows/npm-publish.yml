@@ -24,6 +24,7 @@ jobs:
       - run: bash ./tools/tsc.sh
       - run: node tools/createIndex.js
       - run: npm run build
-      - run: npm publish
+      - run: npm pack
+      - run: npm publish "$(ls | grep tgz)"
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
