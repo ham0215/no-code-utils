@@ -1,3 +1,4 @@
 tools
 tsconfig.json
 .github
+*.ts
